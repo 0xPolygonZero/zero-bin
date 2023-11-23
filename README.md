@@ -78,11 +78,84 @@ Commands:
   help     Print this message or the help of the given subcommand(s)
 
 Options:
-  -n, --num-workers <NUM_WORKERS>  Specifies the number of worker threads to spawn (in memory runtime only)
-  -r, --runtime <RUNTIME>          Specifies the paladin runtime mode [default: amqp] [possible values: amqp, in-memory]
-      --amqp-uri <AMQP_URI>        Specifies the URI for the AMQP broker (AMQP runtime only) 
-  -h, --help                       Print help
+  -h, --help
+          Print help (see a summary with '-h')
+
+Paladin options:
+  -t, --task-bus-routing-key <TASK_BUS_ROUTING_KEY>
+          Specifies the routing key for publishing task messages. In most cases, the default value should suffice
+
+          [default: task]
+
+  -s, --serializer <SERIALIZER>
+          Determines the serialization format to be used
+
+          [default: postcard]
+          [possible values: postcard, cbor]
+
+  -r, --runtime <RUNTIME>
+          Specifies the runtime environment to use
+
+          [default: amqp]
+          [possible values: amqp, in-memory]
+
+  -n, --num-workers <NUM_WORKERS>
+          Specifies the number of worker threads to spawn (in memory runtime only)
+
+      --amqp-uri <AMQP_URI>
+          Provides the URI for the AMQP broker, if the AMQP runtime is selected
+
+          [env: AMQP_URI=amqp://localhost:5672]
+
+Table circuit sizes:
+      --persistence <PERSISTENCE>
+          [default: disk]
+
+          Possible values:
+          - none: Do not persist the processed circuits
+          - disk: Persist the processed circuits to disk
+
+      --arithmetic <CIRCUIT_BIT_RANGE>
+          The min/max size for the arithmetic table circuit.
+
+          [env: ARITHMETIC_CIRCUIT_SIZE=16..22]
+
+      --byte-packing <CIRCUIT_BIT_RANGE>
+          The min/max size for the byte packing table circuit.
+
+          [env: BYTE_PACKING_CIRCUIT_SIZE=10..22]
+
+      --cpu <CIRCUIT_BIT_RANGE>
+          The min/max size for the cpu table circuit.
+
+          [env: CPU_CIRCUIT_SIZE=15..22]
+
+      --keccak <CIRCUIT_BIT_RANGE>
+          The min/max size for the keccak table circuit.
+
+          [env: KECCAK_CIRCUIT_SIZE=14..22]
+
+      --keccak-sponge <CIRCUIT_BIT_RANGE>
+          The min/max size for the keccak sponge table circuit.
+
+          [env: KECCAK_SPONGE_CIRCUIT_SIZE=9..22]
+
+      --logic <CIRCUIT_BIT_RANGE>
+          The min/max size for the logic table circuit.
+
+          [env: LOGIC_CIRCUIT_SIZE=12..22]
+
+      --memory <CIRCUIT_BIT_RANGE>
+          The min/max size for the memory table circuit.
+
+          [env: MEMORY_CIRCUIT_SIZE=18..22]
 ```
+
+Note that both paladin and plonky2 table circuit sizes are configurable via command line arguments and environment variables. The command line arguments take precedence over the environment variables.
+
+**TABLE CIRCUIT SIZES ARE _ONLY_ RELEVANT FOR THE LEADER WHEN RUNNING IN `in-memory` MODE**. 
+
+If you want to configure the table circuit sizes when running in a distributed environment, you must configure the table circuit sizes on the worker processes (the command line arguments are the same).
 
 ### stdio
 The stdio command reads proof input from stdin and writes output to stdout.
