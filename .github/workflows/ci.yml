@@ -16,14 +16,9 @@ jobs:
       - name: Install protoc
         run: sudo apt-get install -y protobuf-compiler
 
-      - name: Remove existing tools
-        run: |
-          cargo uninstall rustfmt
-          cargo uninstall cargo-fmt
-
       - name: Install toolchain
         run: |
-          rustup toolchain install nightly
+          rustup update nightly --force
           rustup component add rustfmt --toolchain nightly
           rustup component add clippy --toolchain nightly
           rustup override set nightly
