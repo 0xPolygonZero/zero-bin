@@ -16,6 +16,9 @@ jobs:
       - name: Remove Pre-installed Rust
         run: |
           rustup toolchain remove stable
+          rm -f /home/runner/.cargo/bin/rust-analyzer
+          rm -f /home/runner/.cargo/bin/rustfmt
+          rm -f /home/runner/.cargo/bin/cargo-fmt
 
       - name: Install Rust Nightly
         run: |
@@ -28,7 +31,7 @@ jobs:
           rustup component add clippy --toolchain nightly
 
       - name: Get Rust Version
-        run: echo "RUST_VERSION=$(rustc --version | cut -d ' ' -f 2)" >> $GITHUB_ENV
+        run: echo "RUST_VERSION=$(rustc --version)" >> $GITHUB_ENV
 
       - name: Cache Cargo Registry and Build Outputs
         uses: actions/cache@v2
