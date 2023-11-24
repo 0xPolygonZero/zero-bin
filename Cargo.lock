@@ -1862,7 +1862,6 @@ version = "0.1.0"
 dependencies = [
  "common",
  "paladin-core",
- "plonky2",
  "plonky_block_proof_gen",
  "proof_protocol_decoder",
  "serde",
