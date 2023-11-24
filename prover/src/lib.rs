@@ -45,13 +45,14 @@ impl ProverInput {
             other_data.clone(),
         )?;
 
-        let agg_proof = IndexedStream::from(txs)
-            .map(TxProof)
-            .fold(AggProof {
-                other: other_data.clone(),
-            })
-            .run(runtime)
-            .await?;
+        let agg_proof =
+            IndexedStream::from(txs)
+                .map(TxProof)
+                .fold(AggProof {
+                    other: other_data.clone(),
+                })
+                .run(runtime)
+                .await?;
 
         if let AggregatableProof::Agg(proof) = agg_proof {
             let prev = previous.map(|p| GeneratedBlockProof {
@@ -59,13 +60,14 @@ impl ProverInput {
                 intern: p,
             });
 
-            let block_proof = Literal(proof)
-                .map(BlockProof {
-                    prev,
-                    other: other_data,
-                })
-                .run(runtime)
-                .await?;
+            let block_proof =
+                Literal(proof)
+                    .map(BlockProof {
+                        prev,
+                        other: other_data,
+                    })
+                    .run(runtime)
+                    .await?;
 
             info!("Successfully proved block {block_number}");
             Ok(block_proof.0)
