@@ -3,6 +3,7 @@ use std::path::PathBuf;
 use clap::{Parser, Subcommand, ValueHint};
 use common::prover_state::cli::CliProverStateConfig;
 
+/// zero-bin leader config
 #[derive(Parser)]
 pub(crate) struct Cli {
     #[command(subcommand)]
@@ -11,8 +12,8 @@ pub(crate) struct Cli {
     #[clap(flatten)]
     pub(crate) paladin: paladin::config::Config,
 
-    /// Note this is only relevant for the leader when running in in-memory
-    /// mode.
+    // Note this is only relevant for the leader when running in in-memory
+    // mode.
     #[clap(flatten)]
     pub(crate) prover_state_config: CliProverStateConfig,
 }
