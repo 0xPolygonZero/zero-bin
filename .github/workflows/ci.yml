@@ -22,6 +22,7 @@ jobs:
           rustup component add rustfmt --toolchain nightly
           rustup component add clippy --toolchain nightly
           rustup override set nightly
+          echo "::add-path::$(rustup which --toolchain nightly cargo | xargs dirname)"
 
       - name: Run cargo clippy
         run: cargo +nightly clippy -- -D warnings
