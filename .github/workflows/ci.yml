@@ -22,13 +22,12 @@ jobs:
           rustup component add rustfmt --toolchain nightly
           rustup component add clippy --toolchain nightly
           rustup override set nightly
-          echo "$(rustup which --toolchain nightly cargo | xargs dirname)" >> $GITHUB_PATH
 
       - name: Run cargo clippy
-        run: cargo clippy -- -D warnings
+        run: rustup run nightly cargo clippy -- -D warnings
 
       - name: Run cargo fmt --check
-        run: cargo +nightly fmt --all -- --check
+        run: rustup run nightly cargo fmt --all -- --check
 
       - name: Run cargo test
-        run: cargo test
+        run: rustup run nightly cargo test
