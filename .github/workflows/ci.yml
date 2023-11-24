@@ -13,21 +13,37 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
 
-      - name: Install protoc
-        run: sudo apt-get install -y protobuf-compiler
-
-      - name: Install toolchain
+      - name: Remove Pre-installed Rust
         run: |
-          rustup update nightly --force
+          rustup toolchain remove stable
+
+      - name: Install Rust Nightly
+        run: |
+          rustup install nightly
+          rustup default nightly
+
+      - name: Add Rust Components
+        run: |
           rustup component add rustfmt --toolchain nightly
           rustup component add clippy --toolchain nightly
-          rustup override set nightly
+
+      - name: Get Rust Version
+        run: echo "RUST_VERSION=$(rustc --version | cut -d ' ' -f 2)" >> $GITHUB_ENV
+
+      - name: Cache Cargo Registry and Build Outputs
+        uses: actions/cache@v2
+        with:
+          path: |
+            ~/.cargo/registry
+            ~/.cargo/git
+            target
+          key: ${{ runner.os }}-rust-${{ env.RUST_VERSION }}-cargo-${{ hashFiles('**/Cargo.lock') }}
 
       - name: Run cargo clippy
-        run: rustup run nightly cargo clippy -- -D warnings
+        run: cargo clippy -- -D warnings
 
       - name: Run cargo fmt --check
-        run: rustup run nightly cargo fmt --all -- --check
+        run: cargo fmt --all -- --check
 
       - name: Run cargo test
-        run: rustup run nightly cargo test
+        run: cargo test
