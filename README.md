@@ -238,7 +238,6 @@ Using `jq` we can merge the previous proof and the block input into a single JSO
 
 ```bash
 jq -s '{prover_input: .[0], previous: .[1]}' ./input/block_6.json ./output/proof_5.json | curl -X POST -H "Content-Type: application/json" -d @- http://localhost:8080/prove
-
 ```
 
 ### Paladin Runtime
@@ -246,6 +245,11 @@ jq -s '{prover_input: .[0], previous: .[1]}' ./input/block_6.json ./output/proof
 Paladin supports both an AMQP and in-memory runtime. The in-memory runtime will emulate a cluster in memory within a single process, and is useful for testing. The AMQP runtime is geared for a production environment. The AMQP runtime requires a running AMQP broker and spinning up worker processes. The AMQP uri can be specified with the `--amqp-uri` flag or be set with the `AMQP_URI` environment variable.
 
 #### Starting an AMQP enabled cluster
+
+Start rabbitmq
+```bash
+docker run --name rabbitmq -p 5672:5672 -p 15672:15672 rabbitmq:3-management
+```
 
 ##### Start worker(s)
 
