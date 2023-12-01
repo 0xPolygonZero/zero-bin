@@ -25,3 +25,7 @@ opt-level = 3
 incremental = true
 lto = "fat"
 codegen-units = 1
+
+[patch."https://github.com/0xPolygonZero/plonky2.git"]
+plonky2 = { git = "https://github.com/topos-protocol/plonky2.git", rev = "f4a1bd3115de95eb9d846b77dfa30871a28a2d2c" }
+plonky2_evm = { git = "https://github.com/topos-protocol/plonky2.git", rev = "f4a1bd3115de95eb9d846b77dfa30871a28a2d2c" }

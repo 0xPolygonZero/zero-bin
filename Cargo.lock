@@ -2101,7 +2101,7 @@ dependencies = [
 [[package]]
 name = "plonky2"
 version = "0.1.4"
-source = "git+https://github.com/0xPolygonZero/plonky2.git?rev=5572da30d7ab818594cf8659839fa832dfcf1d3d#5572da30d7ab818594cf8659839fa832dfcf1d3d"
+source = "git+https://github.com/topos-protocol/plonky2.git?rev=f4a1bd3115de95eb9d846b77dfa30871a28a2d2c#f4a1bd3115de95eb9d846b77dfa30871a28a2d2c"
 dependencies = [
  "ahash",
  "anyhow",
@@ -2125,7 +2125,7 @@ dependencies = [
 [[package]]
 name = "plonky2_evm"
 version = "0.1.1"
-source = "git+https://github.com/0xPolygonZero/plonky2.git?rev=5572da30d7ab818594cf8659839fa832dfcf1d3d#5572da30d7ab818594cf8659839fa832dfcf1d3d"
+source = "git+https://github.com/topos-protocol/plonky2.git?rev=f4a1bd3115de95eb9d846b77dfa30871a28a2d2c#f4a1bd3115de95eb9d846b77dfa30871a28a2d2c"
 dependencies = [
  "anyhow",
  "bytes",
@@ -2159,7 +2159,7 @@ dependencies = [
 [[package]]
 name = "plonky2_field"
 version = "0.1.1"
-source = "git+https://github.com/0xPolygonZero/plonky2.git?rev=5572da30d7ab818594cf8659839fa832dfcf1d3d#5572da30d7ab818594cf8659839fa832dfcf1d3d"
+source = "git+https://github.com/topos-protocol/plonky2.git?rev=f4a1bd3115de95eb9d846b77dfa30871a28a2d2c#f4a1bd3115de95eb9d846b77dfa30871a28a2d2c"
 dependencies = [
  "anyhow",
  "itertools",
@@ -2174,7 +2174,7 @@ dependencies = [
 [[package]]
 name = "plonky2_maybe_rayon"
 version = "0.1.1"
-source = "git+https://github.com/0xPolygonZero/plonky2.git?rev=5572da30d7ab818594cf8659839fa832dfcf1d3d#5572da30d7ab818594cf8659839fa832dfcf1d3d"
+source = "git+https://github.com/topos-protocol/plonky2.git?rev=f4a1bd3115de95eb9d846b77dfa30871a28a2d2c#f4a1bd3115de95eb9d846b77dfa30871a28a2d2c"
 dependencies = [
  "rayon",
 ]
@@ -2182,7 +2182,7 @@ dependencies = [
 [[package]]
 name = "plonky2_util"
 version = "0.1.1"
-source = "git+https://github.com/0xPolygonZero/plonky2.git?rev=5572da30d7ab818594cf8659839fa832dfcf1d3d#5572da30d7ab818594cf8659839fa832dfcf1d3d"
+source = "git+https://github.com/topos-protocol/plonky2.git?rev=f4a1bd3115de95eb9d846b77dfa30871a28a2d2c#f4a1bd3115de95eb9d846b77dfa30871a28a2d2c"
 
 [[package]]
 name = "plonky_block_proof_gen"
