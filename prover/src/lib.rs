@@ -60,10 +60,7 @@ impl ProverInput {
             });
 
             let block_proof = Literal(proof)
-                .map(&BlockProof {
-                    prev,
-                    other: other_data,
-                })
+                .map(&BlockProof { prev })
                 .run(runtime)
                 .await?;
 
