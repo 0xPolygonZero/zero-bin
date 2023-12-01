@@ -8,7 +8,7 @@ use plonky_block_proof_gen::{
     proof_types::{AggregatableProof, GeneratedAggProof, GeneratedBlockProof},
     prover_state::ProverState,
 };
-use proof_protocol_decoder::types::{OtherBlockData, TxnProofGenIR};
+use proof_protocol_decoder::types::TxnProofGenIR;
 use serde::{Deserialize, Serialize};
 
 fn p_state() -> &'static ProverState {
@@ -32,9 +32,7 @@ impl Operation for TxProof {
 }
 
 #[derive(Deserialize, Serialize, RemoteExecute)]
-pub struct AggProof {
-    pub other: OtherBlockData,
-}
+pub struct AggProof;
 
 impl Monoid for AggProof {
     type Elem = AggregatableProof;

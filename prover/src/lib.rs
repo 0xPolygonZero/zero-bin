@@ -47,9 +47,7 @@ impl ProverInput {
 
         let agg_proof = IndexedStream::from(txs)
             .map(&TxProof)
-            .fold(&AggProof {
-                other: other_data.clone(),
-            })
+            .fold(&AggProof)
             .run(runtime)
             .await?;
 
