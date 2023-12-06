@@ -6,15 +6,15 @@
 # 3 --> Rpc endpoint:port (eg. http://35.246.1.96:8545)
 
 export RUST_BACKTRACE=1
-export RUST_LOG=plonky2=trace,plonky2_evm=trace
+export RUST_LOG=plonky2=trace,plonky2_evm=trace,proof_protocol_decoder=trace
 
-export ARTITHMETIC_CIRCUIT_SIZE="16..23"
+export ARTITHMETIC_CIRCUIT_SIZE="16..21"
 export BYTE_PACKING_CIRCUIT_SIZE="9..21"
-export CPU_CIRCUIT_SIZE="12..25"
+export CPU_CIRCUIT_SIZE="12..21"
 export KECCAK_CIRCUIT_SIZE="14..20"
 export KECCAK_SPONGE_CIRCUIT_SIZE="9..15"
 export LOGIC_CIRCUIT_SIZE="12..18"
-export MEMORY_CIRCUIT_SIZE="17..28"
+export MEMORY_CIRCUIT_SIZE="17..23"
 
 PROOF_OUTPUT_DIR="proofs"
 ALWAYS_WRITE_LOGS=0 # Change this to `1` if you always want logs to be written.
@@ -45,7 +45,7 @@ do
         exit $retVal
     else
         # Remove the log on success if we don't want to keep it.
-        if [ $ALWAYS_WRITE_LOGS ]; then
+        if [ $ALWAYS_WRITE_LOGS -ne 0 ]; then
             rm $OUT_LOG_PATH
         fi
     fi

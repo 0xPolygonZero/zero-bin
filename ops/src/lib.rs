@@ -40,8 +40,7 @@ impl Monoid for AggProof {
     type Elem = AggregatableProof;
 
     fn combine(&self, a: Self::Elem, b: Self::Elem) -> Result<Self::Elem> {
-        let result =
-            generate_agg_proof(p_state(), &a, &b).map_err(FatalError::from)?;
+        let result = generate_agg_proof(p_state(), &a, &b).map_err(FatalError::from)?;
 
         Ok(result.into())
     }
