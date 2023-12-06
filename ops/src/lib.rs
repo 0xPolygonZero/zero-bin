@@ -41,7 +41,7 @@ impl Monoid for AggProof {
 
     fn combine(&self, a: Self::Elem, b: Self::Elem) -> Result<Self::Elem> {
         let result =
-            generate_agg_proof(p_state(), &a, &b, self.other.clone()).map_err(FatalError::from)?;
+            generate_agg_proof(p_state(), &a, &b).map_err(FatalError::from)?;
 
         Ok(result.into())
     }
@@ -64,7 +64,7 @@ impl Operation for BlockProof {
 
     fn execute(&self, input: Self::Input) -> Result<Self::Output> {
         Ok(
-            generate_block_proof(p_state(), self.prev.as_ref(), &input, self.other.clone())
+            generate_block_proof(p_state(), self.prev.as_ref(), &input)
                 .map_err(FatalError::from)?,
         )
     }
