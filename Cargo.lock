@@ -1634,6 +1634,7 @@ dependencies = [
  "ethereum-types",
  "ops",
  "paladin-core",
+ "plonky2_evm",
  "plonky_block_proof_gen",
  "prover",
  "rpc",
