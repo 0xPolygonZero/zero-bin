@@ -2,7 +2,7 @@ use anyhow::{Context, Result};
 use ethereum_types::{Address, Bloom, H256, U256};
 use futures::{stream::FuturesOrdered, TryStreamExt};
 use plonky2_evm::proof::{BlockHashes, BlockMetadata};
-use proof_protocol_decoder::{
+use protocol_decoder::{
     trace_protocol::{BlockTrace, BlockTraceTriePreImages, TxnInfo},
     types::{BlockLevelData, OtherBlockData},
 };
