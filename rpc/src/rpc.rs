@@ -4,7 +4,7 @@ use futures::{stream::FuturesOrdered, TryStreamExt};
 use plonky2_evm::proof::{BlockHashes, BlockMetadata};
 use protocol_decoder::{
     trace_protocol::{BlockTrace, BlockTraceTriePreImages, TxnInfo},
-    types::{BlockLevelData, OtherBlockData, TrieRootHash},
+    types::{BlockLevelData, OtherBlockData},
 };
 use prover::ProverInput;
 use reqwest::IntoUrl;
@@ -171,8 +171,8 @@ impl EthGetBlockByNumberResponse {
         Ok(hashes)
     }
 
-    async fn fetch_genesis_state_trie_root<U: IntoUrl + Copy>(rpc_url: U) -> Result<H256> {
-        let res = Self::fetch(rpc_url, 0).await?;
+    async fn fetch_block_root<U: IntoUrl + Copy>(rpc_url: U, b_height: u64) -> Result<H256> {
+        let res = Self::fetch(rpc_url, b_height).await?;
         Ok(res.result.state_root)
     }
 }
@@ -220,12 +220,16 @@ struct RpcBlockMetadata {
 }
 
 impl RpcBlockMetadata {
-    async fn fetch(rpc_url: &str, block_number: u64) -> Result<Self> {
-        let (block_result, chain_id_result, prev_hashes, _) = try_join!(
+    async fn fetch(
+        rpc_url: &str,
+        block_number: u64,
+        checkpoint_state_trie_b_height: u64,
+    ) -> Result<Self> {
+        let (block_result, chain_id_result, prev_hashes, checkpoint_state_trie_root) = try_join!(
             EthGetBlockByNumberResponse::fetch(rpc_url, block_number),
             EthChainIdResponse::fetch(rpc_url),
             EthGetBlockByNumberResponse::fetch_previous_block_hashes(rpc_url, block_number),
-            EthGetBlockByNumberResponse::fetch_genesis_state_trie_root(rpc_url)
+            EthGetBlockByNumberResponse::fetch_block_root(rpc_url, checkpoint_state_trie_b_height)
         )?;
 
         Ok(Self {
@@ -279,15 +283,19 @@ impl From<RpcBlockMetadata> for OtherBlockData {
                     cur_hash: block_by_number.result.hash,
                 },
             },
-            genesis_state_trie_root,
+            checkpoint_state_trie_root,
         }
     }
 }
 
-pub async fn fetch_prover_input(rpc_url: &str, block_number: u64) -> Result<ProverInput> {
+pub async fn fetch_prover_input(
+    rpc_url: &str,
+    block_number: u64,
+    checkpoint_b_height: u64,
+) -> Result<ProverInput> {
     let (trace_result, rpc_block_metadata) = try_join!(
         JerigonTraceResponse::fetch(rpc_url, block_number),
-        RpcBlockMetadata::fetch(rpc_url, block_number),
+        RpcBlockMetadata::fetch(rpc_url, block_number, checkpoint_b_height),
     )?;
 
     debug!("Got block result: {:?}", rpc_block_metadata.block_by_number);

@@ -65,6 +65,7 @@ async fn main() -> Result<()> {
             block_number,
             previous_proof,
             proof_output_path,
+            checkpoint_height,
         } => {
             let previous_proof = get_previous_proof(previous_proof)?;
 
@@ -74,6 +75,7 @@ async fn main() -> Result<()> {
                 block_number,
                 previous_proof,
                 proof_output_path,
+                checkpoint_height,
             )
             .await?;
         }
