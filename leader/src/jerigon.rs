@@ -29,7 +29,7 @@ pub(crate) async fn jerigon_main(
 
     let recovered_pub_vals =
         PublicValues::from_public_inputs(&proof.as_ref().unwrap().intern.public_inputs);
-    
+
     println!(
         "Public vals of block {}: {:#?}",
         block_number, recovered_pub_vals
