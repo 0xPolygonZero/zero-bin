@@ -41,6 +41,9 @@ pub(crate) enum Command {
         /// stdout.
         #[arg(long, short = 'o', value_hint = ValueHint::FilePath)]
         proof_output_path: Option<PathBuf>,
+        /// The height of the last checkpoint. If we prove a block on a checkpoint height, then we do not require the previous block proof. Note that it's still undecided on how we will get the actual checkpoint height in production.
+        #[arg(long, short = 'c', value_hint = u64)]
+        checkpoint_height: Option<u64>,
     },
     /// Reads input from HTTP and writes output to a directory.
     Http {

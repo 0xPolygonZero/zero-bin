@@ -16,6 +16,7 @@ pub(crate) async fn jerigon_main(
     block_number: u64,
     previous: Option<PlonkyProofIntern>,
     proof_output_path_opt: Option<PathBuf>,
+    checkpoint_height: Option<u64>,
 ) -> Result<()> {
     let prover_input = rpc::fetch_prover_input(rpc_url, block_number).await?;
 

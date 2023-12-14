@@ -4,7 +4,7 @@ use futures::{stream::FuturesOrdered, TryStreamExt};
 use plonky2_evm::proof::{BlockHashes, BlockMetadata};
 use protocol_decoder::{
     trace_protocol::{BlockTrace, BlockTraceTriePreImages, TxnInfo},
-    types::{BlockLevelData, OtherBlockData},
+    types::{BlockLevelData, OtherBlockData, TrieRootHash},
 };
 use prover::ProverInput;
 use reqwest::IntoUrl;
@@ -216,12 +216,12 @@ struct RpcBlockMetadata {
     block_by_number: EthGetBlockByNumberResponse,
     chain_id: EthChainIdResponse,
     prev_hashes: Vec<H256>,
-    genesis_state_trie_root: H256,
+    checkpoint_state_trie_root: H256,
 }
 
 impl RpcBlockMetadata {
     async fn fetch(rpc_url: &str, block_number: u64) -> Result<Self> {
-        let (block_result, chain_id_result, prev_hashes, genesis_state_trie_root) = try_join!(
+        let (block_result, chain_id_result, prev_hashes, _) = try_join!(
             EthGetBlockByNumberResponse::fetch(rpc_url, block_number),
             EthChainIdResponse::fetch(rpc_url),
             EthGetBlockByNumberResponse::fetch_previous_block_hashes(rpc_url, block_number),
@@ -232,7 +232,7 @@ impl RpcBlockMetadata {
             block_by_number: block_result,
             chain_id: chain_id_result,
             prev_hashes,
-            genesis_state_trie_root,
+            checkpoint_state_trie_root,
         })
     }
 }
@@ -243,7 +243,7 @@ impl From<RpcBlockMetadata> for OtherBlockData {
             block_by_number,
             chain_id,
             prev_hashes,
-            genesis_state_trie_root,
+            checkpoint_state_trie_root,
         }: RpcBlockMetadata,
     ) -> Self {
         let mut bloom = [U256::zero(); 8];
