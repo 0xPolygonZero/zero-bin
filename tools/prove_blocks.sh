@@ -6,7 +6,7 @@
 # 3 --> Rpc endpoint:port (eg. http://35.246.1.96:8545)
 
 export RUST_BACKTRACE=1
-export RUST_LOG=plonky2=trace,plonky2_evm=trace,proof_protocol_decoder=trace
+export RUST_LOG=plonky2=trace,plonky2_evm=trace,protocol_decoder=trace
 
 export ARTITHMETIC_CIRCUIT_SIZE="16..28"
 export BYTE_PACKING_CIRCUIT_SIZE="9..28"

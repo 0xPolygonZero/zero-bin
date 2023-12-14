@@ -9,7 +9,7 @@ use plonky_block_proof_gen::{
     proof_types::{AggregatableProof, GeneratedBlockProof},
     types::PlonkyProofIntern,
 };
-use proof_protocol_decoder::{
+use protocol_decoder::{
     processed_block_trace::ProcessingMeta,
     trace_protocol::BlockTrace,
     types::{CodeHash, OtherBlockData},
