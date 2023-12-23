@@ -8,7 +8,7 @@ use plonky_block_proof_gen::{
     proof_types::{AggregatableProof, GeneratedAggProof, GeneratedBlockProof},
     prover_state::ProverState,
 };
-use protocol_decoder::types::{OtherBlockData, TxnProofGenIR};
+use protocol_decoder::types::TxnProofGenIR;
 use serde::{Deserialize, Serialize};
 
 fn p_state() -> &'static ProverState {

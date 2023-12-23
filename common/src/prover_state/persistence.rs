@@ -40,7 +40,8 @@ pub fn from_disk(circuit_config: &CircuitConfig) -> Option<AllRecursiveCircuits>
     info!("found prover state at {path}");
     let (gate_serializer, witness_serializer) = get_serializers();
     info!("deserializing prover state...");
-    let state = AllRecursiveCircuits::from_bytes(&bytes, &gate_serializer, &witness_serializer);
+    let state =
+        AllRecursiveCircuits::from_bytes(&bytes, false, &gate_serializer, &witness_serializer);
 
     match state {
         Ok(state) => Some(state),
@@ -67,7 +68,7 @@ pub fn to_disk(circuits: &AllRecursiveCircuits, circuit_config: &CircuitConfig) 
 
     let (gate_serializer, witness_serializer) = get_serializers();
 
-    let bytes = circuits.to_bytes(&gate_serializer, &witness_serializer);
+    let bytes = circuits.to_bytes(false, &gate_serializer, &witness_serializer);
 
     let bytes = match bytes {
         Ok(bytes) => bytes,
