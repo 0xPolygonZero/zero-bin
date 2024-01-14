@@ -2138,7 +2138,7 @@ dependencies = [
 [[package]]
 name = "plonky2"
 version = "0.1.4"
-source = "git+https://github.com/0xPolygonZero/plonky2.git?rev=70483050252e403409bc676ab2572629f4d09661#70483050252e403409bc676ab2572629f4d09661"
+source = "git+https://github.com/0xPolygonZero/plonky2.git?branch=robin/tmp#6b2f4ff64025edf4622381ceff20fbe504c41e4a"
 dependencies = [
  "ahash",
  "anyhow",
@@ -2162,7 +2162,7 @@ dependencies = [
 [[package]]
 name = "plonky2_evm"
 version = "0.1.1"
-source = "git+https://github.com/0xPolygonZero/plonky2.git?rev=70483050252e403409bc676ab2572629f4d09661#70483050252e403409bc676ab2572629f4d09661"
+source = "git+https://github.com/0xPolygonZero/plonky2.git?branch=robin/tmp#6b2f4ff64025edf4622381ceff20fbe504c41e4a"
 dependencies = [
  "anyhow",
  "bytes",
@@ -2196,7 +2196,7 @@ dependencies = [
 [[package]]
 name = "plonky2_field"
 version = "0.1.1"
-source = "git+https://github.com/0xPolygonZero/plonky2.git?rev=70483050252e403409bc676ab2572629f4d09661#70483050252e403409bc676ab2572629f4d09661"
+source = "git+https://github.com/0xPolygonZero/plonky2.git?branch=robin/tmp#6b2f4ff64025edf4622381ceff20fbe504c41e4a"
 dependencies = [
  "anyhow",
  "itertools",
@@ -2211,7 +2211,7 @@ dependencies = [
 [[package]]
 name = "plonky2_maybe_rayon"
 version = "0.1.1"
-source = "git+https://github.com/0xPolygonZero/plonky2.git?rev=70483050252e403409bc676ab2572629f4d09661#70483050252e403409bc676ab2572629f4d09661"
+source = "git+https://github.com/0xPolygonZero/plonky2.git?branch=robin/tmp#6b2f4ff64025edf4622381ceff20fbe504c41e4a"
 dependencies = [
  "rayon",
 ]
@@ -2219,12 +2219,12 @@ dependencies = [
 [[package]]
 name = "plonky2_util"
 version = "0.1.1"
-source = "git+https://github.com/0xPolygonZero/plonky2.git?rev=70483050252e403409bc676ab2572629f4d09661#70483050252e403409bc676ab2572629f4d09661"
+source = "git+https://github.com/0xPolygonZero/plonky2.git?branch=robin/tmp#6b2f4ff64025edf4622381ceff20fbe504c41e4a"
 
 [[package]]
 name = "plonky_block_proof_gen"
 version = "0.1.0"
-source = "git+https://github.com/0xPolygonZero/proof-protocol-decoder.git?rev=ca12e0d21786cee5dbe95abc57937bf04924126c#ca12e0d21786cee5dbe95abc57937bf04924126c"
+source = "git+https://github.com/0xPolygonZero/proof-protocol-decoder.git?branch=robin/tmp#591c954c2f574e6ab0ce7a52c9c4d44c55e71d25"
 dependencies = [
  "ethereum-types",
  "log",
@@ -2320,7 +2320,7 @@ dependencies = [
 [[package]]
 name = "protocol_decoder"
 version = "0.1.0"
-source = "git+https://github.com/0xPolygonZero/proof-protocol-decoder.git?rev=ca12e0d21786cee5dbe95abc57937bf04924126c#ca12e0d21786cee5dbe95abc57937bf04924126c"
+source = "git+https://github.com/0xPolygonZero/proof-protocol-decoder.git?branch=robin/tmp#591c954c2f574e6ab0ce7a52c9c4d44c55e71d25"
 dependencies = [
  "bytes",
  "ciborium",
