@@ -296,6 +296,7 @@ impl From<RpcBlockMetadata> for OtherBlockData {
                     prev_hashes,
                     cur_hash: block_by_number.result.hash,
                 },
+                withdrawals: Vec::new(), // TODO: Fix very soon!
             },
             checkpoint_state_trie_root,
         }
