@@ -11,8 +11,8 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 clap = { version = "4.4.6", features = ["derive", "env"] }
 tokio = { version = "1.33.0", features = ["full"] }
 serde = "1.0.183"
-plonky_block_proof_gen = { git = "https://github.com/0xPolygonZero/proof-protocol-decoder.git", rev = "604e956f674dc1ea7d6c5e71c594b328e7b25399" }
-protocol_decoder = { git = "https://github.com/0xPolygonZero/proof-protocol-decoder.git", rev = "604e956f674dc1ea7d6c5e71c594b328e7b25399" }
+plonky_block_proof_gen = { git = "https://github.com/0xPolygonZero/proof-protocol-decoder.git", branch = "john_temp_fix_branch" }
+protocol_decoder = { git = "https://github.com/0xPolygonZero/proof-protocol-decoder.git", branch = "john_temp_fix_branch" }
 plonky2_evm = { git = "https://github.com/0xPolygonZero/plonky2.git", rev = "265d46a96ecfec49a32973f66f8aa811586c5d4a" }
 plonky2 = { git = "https://github.com/0xPolygonZero/plonky2.git", rev = "265d46a96ecfec49a32973f66f8aa811586c5d4a" }
 serde_path_to_error = "0.1.14"
@@ -33,3 +33,9 @@ opt-level = 3
 incremental = true
 lto = "fat"
 codegen-units = 1
+
+[patch."https://github.com/0xPolygonZero/proof-protocol-decoder.git"]
+protocol_decoder = { git = "https://github.com/0xPolygonZero/proof-protocol-decoder.git?branch=john_temp_fix_branch" }
+
+[patch."https://github.com/0xPolygonZero/eth_trie_utils.git"]
+eth_trie_utils = { git = "https://github.com/0xPolygonZero/eth_trie_utils.git?branch=john_temp_fix_branch" }
