@@ -80,7 +80,9 @@ pub(crate) trait DiskResource {
     }
 }
 
-/// Pre-generated circuits containing just the three base circuits.
+/// Pre-generated circuits containing just the three higher-level circuits.
+/// These are sufficient for generating aggregation proofs and block
+/// proofs, but not for transaction proofs.
 #[derive(Debug, Default)]
 pub(crate) struct BaseProverResource;
 
