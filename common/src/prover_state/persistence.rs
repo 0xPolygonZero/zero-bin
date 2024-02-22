@@ -5,7 +5,6 @@ use std::{
     path::Path,
 };
 
-use evm_arithmetization::fixed_recursive_verifier::RecursiveCircuitsForTableSize;
 use plonky2::util::serialization::{
     Buffer, DefaultGateSerializer, DefaultGeneratorSerializer, IoError,
 };
@@ -14,7 +13,7 @@ use thiserror::Error;
 
 use super::{
     circuit::{Circuit, CircuitConfig},
-    Config, Field, SIZE,
+    Config, RecursiveCircuitsForTableSize, SIZE,
 };
 
 const PROVER_STATE_FILE_PREFIX: &str = "./prover_state";
@@ -154,7 +153,7 @@ impl DiskResource for MonolithicProverResource {
 pub(crate) struct RecursiveCircuitResource;
 
 impl DiskResource for RecursiveCircuitResource {
-    type Resource = RecursiveCircuitsForTableSize<Field, Config, SIZE>;
+    type Resource = RecursiveCircuitsForTableSize;
     type Error = IoError;
     type PathConstrutor = (Circuit, usize);
 
@@ -179,8 +178,7 @@ impl DiskResource for RecursiveCircuitResource {
 
     fn deserialize(
         bytes: &[u8],
-    ) -> Result<RecursiveCircuitsForTableSize<Field, Config, SIZE>, DiskResourceError<Self::Error>>
-    {
+    ) -> Result<RecursiveCircuitsForTableSize, DiskResourceError<Self::Error>> {
         let (gate_serializer, witness_serializer) = get_serializers();
         let mut buffer = Buffer::new(bytes);
         RecursiveCircuitsForTableSize::from_buffer(

@@ -11,7 +11,9 @@ use proof_gen::types::AllRecursiveCircuits;
 use crate::parsing::{parse_range, RangeParseError};
 
 /// Number of tables defined in plonky2.
-pub const NUM_TABLES: usize = 7;
+///
+/// TODO: This should be made public in the evm_arithmetization crate.
+pub(crate) const NUM_TABLES: usize = 7;
 
 /// New type wrapper for [`Range`] that implements [`FromStr`] and [`Display`].
 ///

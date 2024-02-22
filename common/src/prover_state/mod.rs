@@ -13,10 +13,7 @@
 //!   [`set_prover_state_from_config`] function.
 use std::sync::OnceLock;
 
-use evm_arithmetization::{
-    fixed_recursive_verifier::RecursiveCircuitsForTableSize, proof::AllProof, prover::prove,
-    AllStark, StarkConfig,
-};
+use evm_arithmetization::{proof::AllProof, prover::prove, AllStark, StarkConfig};
 use plonky2::{
     field::goldilocks_field::GoldilocksField, plonk::config::PoseidonGoldilocksConfig,
     util::timing::TimingTree,
@@ -38,6 +35,13 @@ pub mod persistence;
 pub(crate) type Config = PoseidonGoldilocksConfig;
 pub(crate) type Field = GoldilocksField;
 pub(crate) const SIZE: usize = 2;
+
+pub(crate) type RecursiveCircuitsForTableSize =
+    evm_arithmetization::fixed_recursive_verifier::RecursiveCircuitsForTableSize<
+        Field,
+        Config,
+        SIZE,
+    >;
 
 /// The global prover state.
 ///
@@ -117,15 +121,13 @@ impl ProverStateManager {
     /// Using this information, for each circuit, a tuple is returned,
     /// containing:
     /// 1. The loaded table circuit at the specified size.
-    /// 2. An offset indicating the distance of the specified size relative to
-    ///    the configured range used to pre-process the circuits.
-    #[allow(clippy::type_complexity)]
+    /// 2. An offset indicating the position of the specified size within the
+    ///    configured range used when pre-generating the circuits.
     fn load_table_circuits(
         &self,
         config: &StarkConfig,
         all_proof: &AllProof<Field, Config, SIZE>,
-    ) -> anyhow::Result<[(RecursiveCircuitsForTableSize<Field, Config, SIZE>, u8); NUM_TABLES]>
-    {
+    ) -> anyhow::Result<[(RecursiveCircuitsForTableSize, u8); NUM_TABLES]> {
         let degrees = all_proof.degree_bits(config);
 
         /// Given a recursive circuit index (e.g., Arithmetic / 0), return a
