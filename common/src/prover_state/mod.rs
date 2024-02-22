@@ -163,7 +163,8 @@ impl ProverStateManager {
     }
 
     /// Generate a transaction proof using the specified input, loading the
-    /// circuit tables as needed to shrink the STARK proof.
+    /// circuit tables as needed to shrink the individual STARK proofs, and
+    /// finally aggregating them to a final transaction proof.
     fn txn_proof_on_demand(&self, input: TxnProofGenIR) -> anyhow::Result<GeneratedTxnProof> {
         let config = StarkConfig::standard_fast_config();
         let all_stark = AllStark::default();
