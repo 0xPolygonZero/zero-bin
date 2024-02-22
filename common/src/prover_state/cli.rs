@@ -1,10 +1,12 @@
 //! CLI arguments for constructing a [`CircuitConfig`], which can be used to
 //! construct table circuits.
-use clap::Args;
+use std::fmt::Display;
+
+use clap::{Args, ValueEnum};
 
 use super::{
     circuit::{Circuit, CircuitConfig, CircuitSize},
-    CircuitPersistence, ProverStateConfig,
+    ProverStateManager, TableLoadStrategy,
 };
 
 /// The help heading for the circuit arguments.
@@ -19,6 +21,33 @@ const VALUE_NAME: &str = "CIRCUIT_BIT_RANGE";
 /// Displayed in the help message.
 fn circuit_arg_desc(circuit_name: &str) -> String {
     format!("The min/max size for the {circuit_name} table circuit.")
+}
+
+/// Specifies whether to persist the processed circuits.
+#[derive(Debug, Clone, Copy, ValueEnum)]
+pub enum CircuitPersistence {
+    /// Do not persist the processed circuits.
+    None,
+    /// Persist the processed circuits to disk.
+    Disk,
+}
+
+impl CircuitPersistence {
+    pub fn with_load_strategy(self, load_strategy: TableLoadStrategy) -> super::CircuitPersistence {
+        match self {
+            CircuitPersistence::None => super::CircuitPersistence::None,
+            CircuitPersistence::Disk => super::CircuitPersistence::Disk(load_strategy),
+        }
+    }
+}
+
+impl Display for CircuitPersistence {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            CircuitPersistence::None => write!(f, "none"),
+            CircuitPersistence::Disk => write!(f, "disk"),
+        }
+    }
 }
 
 /// Macro for generating the [`CliCircuitConfig`] struct.
@@ -73,16 +102,13 @@ impl CliProverStateConfig {
         config
     }
 
-    pub fn into_prover_state_config(self) -> ProverStateConfig {
-        ProverStateConfig {
-            persistence: self.persistence,
+    pub fn into_prover_state_manager(
+        self,
+        persistence: super::CircuitPersistence,
+    ) -> ProverStateManager {
+        ProverStateManager {
+            persistence,
             circuit_config: self.into_circuit_config(),
         }
-    }
-}
-
-impl From<CliProverStateConfig> for ProverStateConfig {
-    fn from(item: CliProverStateConfig) -> Self {
-        item.into_prover_state_config()
     }
 }
