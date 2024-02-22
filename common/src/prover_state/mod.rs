@@ -54,8 +54,8 @@ static P_STATE: OnceLock<ProverState> = OnceLock::new();
 ///
 /// Unlike the prover state, the prover state manager houses configuration and
 /// persistence information. This allows it to differentiate between the
-/// different transaction proof generation strategies. As such, generally only
-/// necessary when generating transaction proofs.
+/// different transaction proof generation strategies. As such, it is generally
+/// only necessary when generating transaction proofs.
 ///
 /// It's specified as a `OnceLock` for the same reasons as the prover state.
 static MANAGER: OnceLock<ProverStateManager> = OnceLock::new();
