@@ -18,7 +18,7 @@ fn main() -> Result<()> {
 
     let verifer = args
         .prover_state_config
-        .into_prover_state_manager(Default::default())
+        .into_prover_state_manager()
         .verifier()?;
 
     verifer.verify(&input)?;

@@ -36,13 +36,11 @@ async fn main() -> Result<()> {
     if let paladin::config::Runtime::InMemory = args.paladin.runtime {
         // If running in emulation mode, we'll need to initialize the prover
         // state here.
-        let persistence = args.prover_state_config.persistence;
         args.prover_state_config
-            .into_prover_state_manager(
-                // Use the monolithic load strategy for the prover state when running in
-                // emulation mode.
-                persistence.with_load_strategy(TableLoadStrategy::Monolithic),
-            )
+            .into_prover_state_manager()
+            // Use the monolithic load strategy for the prover state when running in
+            // emulation mode.
+            .with_load_strategy(TableLoadStrategy::Monolithic)
             .initialize()?;
     }
 

@@ -57,6 +57,8 @@ macro_rules! gen_prover_state_config {
         pub struct CliProverStateConfig {
             #[clap(long, help_heading = HEADING, default_value_t = CircuitPersistence::Disk)]
             pub persistence: CircuitPersistence,
+            #[clap(long, help_heading = HEADING, default_value_t = TableLoadStrategy::OnDemand)]
+            pub load_strategy: TableLoadStrategy,
 
             $(
                 #[clap(
@@ -102,13 +104,16 @@ impl CliProverStateConfig {
         config
     }
 
-    pub fn into_prover_state_manager(
-        self,
-        persistence: super::CircuitPersistence,
-    ) -> ProverStateManager {
+    pub fn into_prover_state_manager(self) -> ProverStateManager {
         ProverStateManager {
-            persistence,
+            persistence: self.persistence.with_load_strategy(self.load_strategy),
             circuit_config: self.into_circuit_config(),
         }
+    }
+}
+
+impl From<CliProverStateConfig> for ProverStateManager {
+    fn from(config: CliProverStateConfig) -> Self {
+        config.into_prover_state_manager()
     }
 }

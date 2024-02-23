@@ -11,8 +11,9 @@
 //!   [`evm_arithmetization::fixed_recursive_verifier::AllRecursiveCircuits`].
 //! - Global prover state management via the [`P_STATE`] static and the
 //!   [`set_prover_state_from_config`] function.
-use std::sync::OnceLock;
+use std::{fmt::Display, sync::OnceLock};
 
+use clap::ValueEnum;
 use evm_arithmetization::{proof::AllProof, prover::prove, AllStark, StarkConfig};
 use plonky2::{
     field::goldilocks_field::GoldilocksField, plonk::config::PoseidonGoldilocksConfig,
@@ -75,7 +76,7 @@ pub fn p_manager() -> &'static ProverStateManager {
 }
 
 /// Specifies how to load the table circuits.
-#[derive(Debug, Clone, Copy, Default)]
+#[derive(Debug, Clone, Copy, Default, ValueEnum)]
 pub enum TableLoadStrategy {
     #[default]
     /// Load the circuit tables as needed for shrinking STARK proofs.
@@ -86,6 +87,15 @@ pub enum TableLoadStrategy {
     OnDemand,
     /// Load all the table circuits into a monolithic bundle.
     Monolithic,
+}
+
+impl Display for TableLoadStrategy {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        match self {
+            TableLoadStrategy::OnDemand => write!(f, "on-demand"),
+            TableLoadStrategy::Monolithic => write!(f, "monolithic"),
+        }
+    }
 }
 
 /// Specifies whether to persist the processed circuits.
@@ -114,6 +124,16 @@ pub struct ProverStateManager {
 }
 
 impl ProverStateManager {
+    pub fn with_load_strategy(self, load_strategy: TableLoadStrategy) -> Self {
+        match self.persistence {
+            CircuitPersistence::None => self,
+            CircuitPersistence::Disk(_) => Self {
+                circuit_config: self.circuit_config,
+                persistence: CircuitPersistence::Disk(load_strategy),
+            },
+        }
+    }
+
     /// Load the table circuits necessary to shrink the STARK proof.
     ///
     /// [`AllProof`] provides the necessary degree bits for each circuit via the
