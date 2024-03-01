@@ -31,8 +31,8 @@ authors = ["Polygon Zero <zbrown@polygon.technology>"]
 keywords = ["cryptography", "SNARK", "PLONK", "FRI", "plonky2"]
 categories = ["cryptography::cryptocurrencies"]
 
-[profile.release]
-opt-level = 3
-incremental = true
-lto = "fat"
-codegen-units = 1
+# [profile.release]
+# opt-level = 3
+# incremental = true
+# lto = "fat"
+# codegen-units = 1
