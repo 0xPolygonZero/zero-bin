@@ -25,6 +25,8 @@ impl Operation for TxProof {
     type Output = AggregatableProof;
 
     fn execute(&self, input: Self::Input) -> Result<Self::Output> {
+        println!("Proving TXN {}...", input.txn_number_before);
+
         let result = generate_txn_proof(p_state(), input, None).map_err(FatalError::from)?;
 
         Ok(result.into())
