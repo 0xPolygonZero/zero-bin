@@ -14,9 +14,6 @@
 use std::{fmt::Display, sync::OnceLock};
 
 use clap::ValueEnum;
-<<<<<<< HEAD
-use proof_gen::{prover_state::ProverState, VerifierState};
-=======
 use evm_arithmetization::{proof::AllProof, prover::prove, AllStark, StarkConfig};
 use plonky2::{
     field::goldilocks_field::GoldilocksField, plonk::config::PoseidonGoldilocksConfig,
@@ -24,7 +21,6 @@ use plonky2::{
 };
 use proof_gen::{proof_types::GeneratedTxnProof, prover_state::ProverState, VerifierState};
 use trace_decoder::types::TxnProofGenIR;
->>>>>>> main
 use tracing::info;
 
 use self::circuit::{CircuitConfig, NUM_TABLES};

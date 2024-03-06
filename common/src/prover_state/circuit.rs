@@ -5,11 +5,7 @@ use std::{
     str::FromStr,
 };
 
-<<<<<<< HEAD
-use evm_arithmetization::{all_stark::AllStark, StarkConfig};
-=======
 use evm_arithmetization::{AllStark, StarkConfig};
->>>>>>> main
 use proof_gen::types::AllRecursiveCircuits;
 
 use crate::parsing::{parse_range, RangeParseError};

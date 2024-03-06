@@ -2,10 +2,6 @@ use std::fs::File;
 
 use anyhow::Result;
 use clap::Parser;
-<<<<<<< HEAD
-use common::prover_state::get_verifier_state_from_config;
-=======
->>>>>>> main
 use proof_gen::types::PlonkyProofIntern;
 use serde_json::Deserializer;
 

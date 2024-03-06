@@ -9,11 +9,7 @@ use plonky2::util::serialization::{
     Buffer, DefaultGateSerializer, DefaultGeneratorSerializer, IoError,
 };
 use proof_gen::types::{AllRecursiveCircuits, VerifierData};
-<<<<<<< HEAD
-use tracing::{info, warn};
-=======
 use thiserror::Error;
->>>>>>> main
 
 use super::{
     circuit::{Circuit, CircuitConfig},
