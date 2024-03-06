@@ -35,6 +35,7 @@ impl Operation for TxProof {
     type Output = ();
 
     fn execute(&self, input: Self::Input) -> Result<Self::Output> {
+        println!("PROVING TXN {:?}", input.txn_number_before);
         evm_arithmetization::prover::testing::simulate_execution::<proof_gen::types::Field>(input)
             .map_err(|err| FatalError::from_anyhow(err, FatalStrategy::Terminate))?;
 
