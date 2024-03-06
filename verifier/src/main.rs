@@ -2,7 +2,10 @@ use std::fs::File;
 
 use anyhow::Result;
 use clap::Parser;
+<<<<<<< HEAD
 use common::prover_state::get_verifier_state_from_config;
+=======
+>>>>>>> main
 use proof_gen::types::PlonkyProofIntern;
 use serde_json::Deserializer;
 
@@ -17,9 +20,12 @@ fn main() -> Result<()> {
     let des = &mut Deserializer::from_reader(&file);
     let input: PlonkyProofIntern = serde_path_to_error::deserialize(des)?;
 
-    let verifier_state = get_verifier_state_from_config(args.prover_state_config.into());
+    let verifer = args
+        .prover_state_config
+        .into_prover_state_manager()
+        .verifier()?;
 
-    verifier_state.verify(&input)?;
+    verifer.verify(&input)?;
 
     Ok(())
 }
