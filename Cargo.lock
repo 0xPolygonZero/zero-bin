@@ -1028,7 +1028,7 @@ dependencies = [
 [[package]]
 name = "evm_arithmetization"
 version = "0.1.1"
-source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=robins_not_so_awesome_branch_for_brendan#505beeb874bfeedd84ab38c575e535d6eb64f287"
+source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=robins_not_so_awesome_branch_for_brendan#fd7405f76dc8154bf7b7e859bad0e6dd4fc7d9b4"
 dependencies = [
  "anyhow",
  "bytes",
@@ -1846,7 +1846,7 @@ dependencies = [
 [[package]]
 name = "mpt_trie"
 version = "0.1.1"
-source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=robins_not_so_awesome_branch_for_brendan#505beeb874bfeedd84ab38c575e535d6eb64f287"
+source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=robins_not_so_awesome_branch_for_brendan#fd7405f76dc8154bf7b7e859bad0e6dd4fc7d9b4"
 dependencies = [
  "bytes",
  "enum-as-inner",
@@ -2397,7 +2397,7 @@ dependencies = [
 [[package]]
 name = "proof_gen"
 version = "0.1.1"
-source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=robins_not_so_awesome_branch_for_brendan#505beeb874bfeedd84ab38c575e535d6eb64f287"
+source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=robins_not_so_awesome_branch_for_brendan#fd7405f76dc8154bf7b7e859bad0e6dd4fc7d9b4"
 dependencies = [
  "ethereum-types",
  "evm_arithmetization",
@@ -3344,7 +3344,7 @@ checksum = "b6bc1c9ce2b5135ac7f93c72918fc37feb872bdc6a5533a8b85eb4b86bfdae52"
 [[package]]
 name = "trace_decoder"
 version = "0.1.1"
-source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=robins_not_so_awesome_branch_for_brendan#505beeb874bfeedd84ab38c575e535d6eb64f287"
+source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=robins_not_so_awesome_branch_for_brendan#fd7405f76dc8154bf7b7e859bad0e6dd4fc7d9b4"
 dependencies = [
  "bytes",
  "ciborium",
