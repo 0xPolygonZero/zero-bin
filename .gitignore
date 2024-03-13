@@ -9,3 +9,5 @@ circuits/
 # Folders containing logs from the utility scripts in tools/
 debug/
 proofs/
+
+txn_traces/

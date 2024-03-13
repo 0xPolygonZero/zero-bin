@@ -970,7 +970,7 @@ checksum = "0206175f82b8d6bf6652ff7d71a1e27fd2e4efde587fd368662814d6ec1d9ce0"
 [[package]]
 name = "evm_arithmetization"
 version = "0.1.1"
-source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=develop#845c52a7ac59df36b8b41af432b43669ee802e6b"
+source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=receipt_hash_fix#1b05cf6f09329464a8866e54434fbb066bc66d34"
 dependencies = [
  "anyhow",
  "bytes",
@@ -1771,7 +1771,7 @@ dependencies = [
 [[package]]
 name = "mpt_trie"
 version = "0.1.1"
-source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=develop#845c52a7ac59df36b8b41af432b43669ee802e6b"
+source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=receipt_hash_fix#1b05cf6f09329464a8866e54434fbb066bc66d34"
 dependencies = [
  "bytes",
  "enum-as-inner",
@@ -2303,7 +2303,7 @@ dependencies = [
 [[package]]
 name = "proof_gen"
 version = "0.1.1"
-source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=develop#845c52a7ac59df36b8b41af432b43669ee802e6b"
+source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=receipt_hash_fix#1b05cf6f09329464a8866e54434fbb066bc66d34"
 dependencies = [
  "ethereum-types",
  "evm_arithmetization",
@@ -3239,7 +3239,7 @@ checksum = "b6bc1c9ce2b5135ac7f93c72918fc37feb872bdc6a5533a8b85eb4b86bfdae52"
 [[package]]
 name = "trace_decoder"
 version = "0.1.1"
-source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=develop#845c52a7ac59df36b8b41af432b43669ee802e6b"
+source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=receipt_hash_fix#1b05cf6f09329464a8866e54434fbb066bc66d34"
 dependencies = [
  "bytes",
  "ciborium",
@@ -3256,6 +3256,7 @@ dependencies = [
  "rlp",
  "rlp-derive",
  "serde",
+ "serde_json",
  "serde_with",
  "thiserror",
 ]
