@@ -19,9 +19,9 @@ futures = "0.3.29"
 
 # zk-evm dependencies
 plonky2 = "0.2.0"
-evm_arithmetization = { git = "https://github.com/0xPolygonZero/zk_evm.git", branch = "receipt_hash_fix" }
-trace_decoder = { git = "https://github.com/0xPolygonZero/zk_evm.git", branch = "receipt_hash_fix" }
-proof_gen = { git = "https://github.com/0xPolygonZero/zk_evm.git", branch = "receipt_hash_fix" }
+evm_arithmetization = { git = "https://github.com/0xPolygonZero/zk_evm.git", branch = "extra_debugs" }
+trace_decoder = { git = "https://github.com/0xPolygonZero/zk_evm.git", branch = "extra_debugs" }
+proof_gen = { git = "https://github.com/0xPolygonZero/zk_evm.git", branch = "extra_debugs" }
 
 [workspace.package]
 edition = "2021"

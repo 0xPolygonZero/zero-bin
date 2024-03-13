@@ -9,6 +9,7 @@ use proof_gen::{
 };
 use serde::{Deserialize, Serialize};
 use trace_decoder::types::TxnProofGenIR;
+use tracing::info;
 
 registry!();
 
@@ -21,6 +22,8 @@ impl Operation for TxProof {
     type Output = proof_gen::proof_types::AggregatableProof;
 
     fn execute(&self, input: Self::Input) -> Result<Self::Output> {
+        info!("Generating proof for txn {}", input.txn_number_before);
+
         let proof = common::prover_state::p_manager()
             .generate_txn_proof(input)
             .map_err(|err| FatalError::from_anyhow(err, FatalStrategy::Terminate))?;
@@ -35,6 +38,8 @@ impl Operation for TxProof {
     type Output = ();
 
     fn execute(&self, input: Self::Input) -> Result<Self::Output> {
+        info!("Generating proof for txn {}", input.txn_number_before);
+
         evm_arithmetization::prover::testing::simulate_execution::<proof_gen::types::Field>(input)
             .map_err(|err| FatalError::from_anyhow(err, FatalStrategy::Terminate))?;
 

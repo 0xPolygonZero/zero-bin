@@ -13,14 +13,15 @@ use trace_decoder::{
     trace_protocol::BlockTrace,
     types::{CodeHash, OtherBlockData},
 };
-use tracing::info;
+use tracing::{error, info};
 
 #[derive(Debug, Deserialize, Serialize)]
 pub struct ProverInput {
     pub block_trace: BlockTrace,
     pub other_data: OtherBlockData,
 }
-fn resolve_code_hash_fn(_: &CodeHash) -> Vec<u8> {
+fn resolve_code_hash_fn(c_hash: &CodeHash) -> Vec<u8> {
+    error!("Code hash {:x} failed to resolve!!", c_hash);
     todo!()
 }
 
@@ -36,7 +37,7 @@ impl ProverInput {
         previous: Option<PlonkyProofIntern>,
     ) -> Result<GeneratedBlockProof> {
         let block_number = self.get_block_number();
-        info!("Proving block {block_number}");
+        info!("Proving block {block_number}.");
 
         let other_data = self.other_data;
         let txs = self.block_trace.into_txn_proof_gen_ir(
@@ -64,7 +65,7 @@ impl ProverInput {
             info!("Successfully proved block {block_number}");
             Ok(block_proof.0)
         } else {
-            anyhow::bail!("AggProof is is not GeneratedAggProof")
+            anyhow::bail!("AggProof is not GeneratedAggProof")
         }
     }
 
@@ -75,7 +76,7 @@ impl ProverInput {
         _previous: Option<PlonkyProofIntern>,
     ) -> Result<GeneratedBlockProof> {
         let block_number = self.get_block_number();
-        info!("Testing witness generation for block {block_number}.");
+        info!("Testing witness generation for block {block_number}");
 
         let other_data = self.other_data;
         let txs = self.block_trace.into_txn_proof_gen_ir(
