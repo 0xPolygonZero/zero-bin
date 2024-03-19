@@ -970,8 +970,7 @@ checksum = "0206175f82b8d6bf6652ff7d71a1e27fd2e4efde587fd368662814d6ec1d9ce0"
 [[package]]
 name = "evm_arithmetization"
 version = "0.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ef2af65f5b147f04c94df5df5e21ff9d1632fd357511e183d5e04de059d6fa93"
+source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=old_tries_to_disk#39fd6471eed5baf408b317b6384134a61ada3928"
 dependencies = [
  "anyhow",
  "bytes",
@@ -1772,8 +1771,7 @@ dependencies = [
 [[package]]
 name = "mpt_trie"
 version = "0.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "bbf6d77f630021e46e127abfa047aebfba78bf207ed3dfd1c4f9e2370f9b60cd"
+source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=old_tries_to_disk#39fd6471eed5baf408b317b6384134a61ada3928"
 dependencies = [
  "bytes",
  "enum-as-inner",
@@ -2305,8 +2303,7 @@ dependencies = [
 [[package]]
 name = "proof_gen"
 version = "0.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "657003bc7dcee8b7c487807b8c9e6bf8aef8413f80501948a948b40c885ab7e7"
+source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=old_tries_to_disk#39fd6471eed5baf408b317b6384134a61ada3928"
 dependencies = [
  "ethereum-types",
  "evm_arithmetization",
@@ -3242,8 +3239,7 @@ checksum = "b6bc1c9ce2b5135ac7f93c72918fc37feb872bdc6a5533a8b85eb4b86bfdae52"
 [[package]]
 name = "trace_decoder"
 version = "0.1.1"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f08487265f29176ad03c894b1c1cf8da5adf9d82fc151b3191eb7f55350b5c58"
+source = "git+https://github.com/0xPolygonZero/zk_evm.git?branch=old_tries_to_disk#39fd6471eed5baf408b317b6384134a61ada3928"
 dependencies = [
  "bytes",
  "ciborium",
@@ -3260,6 +3256,7 @@ dependencies = [
  "rlp",
  "rlp-derive",
  "serde",
+ "serde_json",
  "serde_with",
  "thiserror",
 ]
