@@ -1,0 +1,68 @@
+name: Build & Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+env:
+  DEFAULT_TAGS: |
+    type=ref,event=branch
+    type=ref,event=pr
+    type=semver,pattern={{version}}
+    type=semver,pattern={{major}}.{{minor}}
+
+jobs:
+  build:
+    name: Build docker images
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout sources
+        uses: actions/checkout@v4
+
+      - name: Get docker image meta (leader)
+        id: leader-meta
+        uses: docker/metadata-action@v5
+        with:
+          images: gcr/zero-bin-leader
+          tags: ${{ env.DEFAULT_TAGS }}
+
+      - name: Get docker image meta (worker)
+        id: worker-meta
+        uses: docker/metadata-action@v5
+        with:
+          images: gcr/zero-bin-worker
+          tags: ${{ env.DEFAULT_TAGS }}
+
+      - name: Authenticate to Google Cloud
+        id: auth
+        uses: google-github-actions/auth@v1
+        with:
+          token_format: access_token
+          workload_identity_provider: <workload_identity_provider>
+          service_account: <service_account>
+
+      - name: Login to GCR
+        uses: docker/login-action@v3
+        with:
+          registry: gcr.io
+          username: oauth2accesstoken
+          password: ${{ steps.auth.outputs.access_token }}
+
+      - name: Build and push leader
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          dockerfile: leader.Dockerfile
+          push: true
+          tags: ${{ steps.leader-meta.outputs.tags }}
+          labels: ${{ steps.leader-meta.outputs.labels }}
+
+      - name: Build and push worker
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          dockerfile: worker.Dockerfile
+          push: true
+          tags: ${{ steps.worker-meta.outputs.tags }}
+          labels: ${{ steps.worker-meta.outputs.labels }}
