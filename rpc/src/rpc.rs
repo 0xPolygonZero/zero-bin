@@ -104,6 +104,9 @@ struct EthGetBlockByNumberResult {
     parent_hash: H256,
     state_root: H256,
     timestamp: U256,
+
+    // Pre-eip-4895 blocks won't have this field, so if it's missing, using an empty vec is fine.
+    #[serde(default)]
     withdrawals: Vec<Withdrawal>,
 }
 
