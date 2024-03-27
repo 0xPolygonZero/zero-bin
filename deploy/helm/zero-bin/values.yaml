@@ -1,0 +1,32 @@
+
+hull:
+  config:
+    general:
+      fullnameOverride: zero-bin
+    specific:
+      debug: true # a switch influencing creation of objects in this chart
+      version: v1.0.0 # a shared image tag for multiple container
+      myapp: # some exemplary shared configuration settings for the resources
+        rate_limit: 100
+        max_connections: 5
+  objects: # all objects to create are defined here
+    deployment: # create deployments
+      leader: # the base part of the object name for the deployment
+        pod: # configure pod-related aspects
+          containers: # non-init containers
+            leader: # name of container
+              image: # provide image reference
+                repository: gcr/zero-bin-leader # repository
+                tag: _HT*hull.config.specific.version # reference to central tag value above
+              env: # environment variables
+                SERVER_HOSTNAME: # name of variable
+                  value: test
+                SERVER_PORT: # name of variable
+                  value: "8080" # backend service port
+      worker: # the base part of the object name for the deployment
+        pod: # configure pod-related aspects
+          containers: # non-init containers
+            worker: # name of container
+              image: # image reference
+                repository: gcr/zero-bin-worker # repository
+                tag: _HT*hull.config.specific.version # reference to central tag value above
