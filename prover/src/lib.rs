@@ -1,5 +1,6 @@
 use anyhow::Result;
 use ethereum_types::U256;
+#[cfg(feature = "test_only")]
 use futures::stream::TryStreamExt;
 use ops::TxProof;
 use paladin::{
