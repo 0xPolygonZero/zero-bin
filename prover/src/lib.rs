@@ -56,7 +56,7 @@ impl ProverInput {
                 intern: p,
             });
 
-            let block_proof = paladin::Literal(proof)
+            let block_proof = paladin::directive::Literal(proof)
                 .map(&ops::BlockProof { prev })
                 .run(runtime)
                 .await?;
